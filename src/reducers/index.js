@@ -26,7 +26,6 @@ const reducer = function(state = initialState, action) {
             })
 
         case WITHDRAW_FUNDS:
-            console.log(state)
             const userIdx = state.users.findIndex(user => user._id === state.selectedUser._id);
             const accountIdx = state.users[userIdx].accounts.findIndex(account => account.id === state.selectedAccount.id);
 

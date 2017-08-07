@@ -13,9 +13,7 @@ export class Transaction extends React.Component {
         };
 
         this.toggle = this.toggle.bind(this);
-        this.withdrawFive = this.withdrawFive.bind(this);
-        this.withdrawTen = this.withdrawTen.bind(this);
-        this.withdrawTwenty = this.withdrawTwenty.bind(this);
+        this.withdraw = this.withdraw.bind(this);
     }
 
     toggle() {
@@ -23,17 +21,8 @@ export class Transaction extends React.Component {
             modal: !this.state.modal
         });
     }
-    withdrawFive() {
-        this.props.withdrawFunds(5);
-        this.toggle()
-        // window.location.pathname = `/users/${this.props.user._id}/${this.props.account.id}`
-    }
-    withdrawTen() {
-        this.props.withdrawFunds(10);
-        this.toggle();
-    }
-    withdrawTwenty() {
-        this.props.withdrawFunds(20);
+    withdraw(value) {
+        this.props.withdrawFunds(value);
         this.toggle();
     }
 
@@ -47,9 +36,9 @@ export class Transaction extends React.Component {
                         Please pick an amount to withdrawl from your {this.props.account.accountType} account
           </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.withdrawFive}>$5</Button>{' '}
-                        <Button color="secondary" onClick={this.withdrawTen}>$10</Button>{' '}
-                        <Button color="gray" onClick={this.withdrawTwenty}>$20</Button>{' '}
+                        <Button color="primary" onClick={() => this.withdraw(5)}>$5</Button>{' '}
+                        <Button color="secondary" onClick={() => this.withdraw(10)}>$10</Button>{' '}
+                        <Button color="gray" onClick={() => this.withdraw(20)}>$20</Button>{' '}
                         <Button color="danger" onClick={this.toggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
@@ -76,3 +65,7 @@ function mapDispatchToProps(dispatch) {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(Transaction);
+
+
+const button = document.getElementById('#button')
+
